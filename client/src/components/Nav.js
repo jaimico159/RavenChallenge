@@ -44,11 +44,14 @@ class Nav extends Component {
 				<div className="container">
 					<div className="row">
 						<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
+						<div className="col s12 m6 l6 xl6">
 						<input 
-							className="col s12 m6 l6 xl6"
+							className="white"
 							placeholder={this.state.placeholder}
 							onChange={this.Search.bind(this)}
+							style={{margin: '20px 0 0 0'}}
 						/>
+						</div>
 					</div>
 				</div>
 				</div>
