@@ -11,7 +11,10 @@ import {ApolloProvider} from 'react-apollo';
 import {createHttpLink} from 'apollo-link-http';
 
 /*Authentification*/
+//Token must be replaced
 const token = 'TOKEN';
+
+//Allows cURL ops
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
   headers: {
@@ -19,15 +22,20 @@ const httpLink = createHttpLink({
   },
 });
 
+//Apollo Cient
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
 });
 
+
+
 class App extends Component {
   render() {
     return (
+      <ApolloProvider client={client}>
       <h1>GitHub Users</h1>
+      </ApolloProvider>
     );
   }
 }
