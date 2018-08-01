@@ -12,6 +12,7 @@ class Nav extends Component {
 			search: " in:login",
 			inSearch: "true",
 			userid: "",
+			name: "",
 		}
 	}
 
@@ -28,9 +29,10 @@ class Nav extends Component {
 		});
 	}
 
-	setUserId(userid){
+	setUserId(userid, name){
 		this.setState({
-			userid: userid
+			userid: userid,
+			name: name,
 		});
 	}
 
@@ -66,6 +68,7 @@ class Nav extends Component {
 						<a className="col s1 m2 l2 xl2" href="#" onClick={()=>{this.changeInSearch()}}>
 							<img alt="" src={back} />
 						</a>
+						<h3 className="col s11 m6 l6 xl6">{this.state.name}</h3>
 					</div>
 				</div>
 				</div>
