@@ -54,7 +54,29 @@ class User extends Component {
 						if(error) return `Error! ${error.message}}`;
 						return (
 							<div id="users">
-								<div></div>
+								<div className="row">
+									{data.search.edges.map(edge => {
+										return (
+											<div 
+												className="col s12 m6 l4 xl4"
+												key={edge.node.id}
+											>
+												<div className="card-panel grey lighten-5 z-depth-1">
+													<div className="row valign-wrapper">
+														<div className="col s4">
+															<img alt="" src={edge.node.avatarUrl} className="circle responsive-img"/>
+														</div>
+														<div className="col s8">
+																<h5 className="truncate">{'['+edge.node.name+'], ['+edge.node.location+']'}</h5>
+																<h6 className="truncate">{'['+edge.node.login+']'}</h6>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										);
+									})}
+								</div>
 							</div>
 						);
 
