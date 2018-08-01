@@ -59,7 +59,30 @@ class Repo extends Component {
 					if(loading) return <h2>Loading ...</h2>;
 					if(error) return `Error! ${error.message}}`;
 					return (
-						<h1>Repo Encontrado</h1>
+						<div>
+							{data.node.repositories.edges.map(edge => {
+								return (
+									<div key={edge.node.id} className = "container">
+									<div className="row">
+									<div className="col s12">
+										<div className="card-panel grey lighten-5 z-depth-1">
+											<div className="row">
+												<div className="col s4 m5 l5 xl5">
+													<h6>{edge.node.name}</h6>
+													<p>{edge.node.description}</p>
+												</div>
+												<div className="col s4 offset-s4 m3 offset-m4 l3 offset-l4 xl3 offset-xl4">
+													{'Pull Requests Count: '+edge.node.pullRequests.totalCount}
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+									</div>
+									);
+								}
+								)}
+						</div>
 					);
 				}}
 			</Query>
