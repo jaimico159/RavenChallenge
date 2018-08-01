@@ -48,7 +48,6 @@ class User extends Component {
 	render(){
 		var word = this.props.word;
 		var click1 = this.props.click1;
-		var click2 = this.props.click2;
 		return (
 			<Query query={getUserData} variables={{word}}>
 				{({loading, error, data}) => {
@@ -78,7 +77,7 @@ class User extends Component {
 										<div 
 											className="col s12 m6 l4 xl4"
 											key={edge.node.id}
-											onClick={()=>{click1();click2(edge.node.id, edge.node.name)}}
+											onClick={()=>{click1(edge.node.id, edge.node.name)}}
 										>
 											<div className="card-panel grey lighten-5 z-depth-1">
 											<div className="row valign-wrapper">

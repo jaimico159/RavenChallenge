@@ -10,7 +10,7 @@ class Nav extends Component {
 		this.state = {
 			placeholder: "Search GitHub Users...",
 			search: " in:login",
-			inSearch: "true",
+			inSearch: true,
 			userid: "",
 			name: "",
 		}
@@ -19,18 +19,12 @@ class Nav extends Component {
 	Search(event){
 		this.setState({
 			search: event.target.value + ' in:login',
-
 		});
 	}
 
-	changeInSearch(){
+	changeInSearch(userid, name){
 		this.setState({
 			inSearch: !this.state.inSearch,
-		});
-	}
-
-	setUserId(userid, name){
-		this.setState({
 			userid: userid,
 			name: name,
 		});
@@ -57,8 +51,7 @@ class Nav extends Component {
 				</div>
 					<User 
 						word={this.state.search} 
-						click1={()=>this.changeInSearch()}
-						click2={this.setUserId.bind(this)}
+						click1={this.changeInSearch.bind(this)}
 					/>
 				</div>
 			);

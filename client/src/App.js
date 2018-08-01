@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 import Nav from './components/Nav';
-/*
-import User from './components/User';
-import Repo from './components/Repo';
-*/
 
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import {ApolloClient} from 'apollo-client';
