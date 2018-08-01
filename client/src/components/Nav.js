@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import User from './User';
 import Repo from './Repo';
+import back from '../assets/images/back2.png'
 
 class Nav extends Component {
 	constructor(props){
@@ -58,7 +59,20 @@ class Nav extends Component {
 			);
 		} else {
 			return (
-				<Repo userid={this.state.userid}/>
+				<div>
+				<div className="grey lighten-3">
+				<div className="container">
+					<div className="row">
+						<a className="col s1 m2 l2 xl2" href="#" onClick={()=>{this.changeInSearch()}}>
+							<img alt="" src={back} />
+						</a>
+					</div>
+				</div>
+				</div>
+					<div>
+					<Repo userid={this.state.userid}/>
+					</div>
+				</div>
 			);
 		}
 	}
