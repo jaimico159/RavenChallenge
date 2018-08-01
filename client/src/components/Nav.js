@@ -13,6 +13,7 @@ class Nav extends Component {
 	Search(event){
 		this.setState({
 			search: event.target.value + ' in:login',
+
 		});
 	}
 
