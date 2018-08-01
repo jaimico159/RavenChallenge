@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Nav from './components/Nav';
 /*
 import User from './components/User';
 import Repo from './components/Repo';
@@ -35,6 +36,7 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
       <h1>GitHub Users</h1>
+      <Nav/>
       </ApolloProvider>
     );
   }
