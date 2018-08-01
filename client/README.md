@@ -25,7 +25,9 @@ After downloading the Zip File:
 3. Run :
 
 ```
+cd RavnChallenge
 cd client
+npm install
 npm start
 ``` 
 Running this React App doesn't handle any type of backend, according to the [React Web Page](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) "it just creates a frontend build pipeline, so you can use it with any backend you want".
@@ -37,7 +39,9 @@ Running this React App doesn't handle any type of backend, according to the [Rea
 
 ```
 git clone https://github.com/jaimico159/RavenChallenge.git
+cd RavnChallenge
 cd client
+npm install
 npm start
 ``` 
 ### Replacing the Token
