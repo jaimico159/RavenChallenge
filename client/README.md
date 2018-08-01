@@ -70,4 +70,8 @@ The Nav component acts like a parent component, it has a search bar that fires t
 
 The App component shows the Nav component.
 
+##Style
+
+For the project style Materialize designed by Google is used, it is defined in client/public/index.html 
+
 
