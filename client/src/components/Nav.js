@@ -8,6 +8,7 @@ class Nav extends Component {
 		this.state = {
 			placeholder: "Search GitHub Users...",
 			search: " in:login",
+			inSearch: "true",
 		}
 	}
 
@@ -18,24 +19,36 @@ class Nav extends Component {
 		});
 	}
 
+	changeInSearch(){
+		this.setState({
+			inSearch: !this.state.inSearch
+		});
+	}
+
 	render(){
-		return (
-			<div>
-			<div className="grey lighten-3">
-			<div class="container">
-				<div class="row">
-					<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
-					<input 
-						className="col s12 m6 l6 xl6"
-						placeholder={this.state.placeholder}
-						onChange={this.Search.bind(this)}
-					/>
+		if(this.state.inSearch){
+			return (
+				<div>
+				<div className="grey lighten-3">
+				<div className="container">
+					<div className="row">
+						<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
+						<input 
+							className="col s12 m6 l6 xl6"
+							placeholder={this.state.placeholder}
+							onChange={this.Search.bind(this)}
+						/>
+					</div>
 				</div>
-			</div>
-			</div>
-				<User word={this.state.search}/>
-			</div>
-		);
+				</div>
+					<User word={this.state.search} click={()=>this.changeInSearch()}/>
+				</div>
+			);
+		} else {
+			return (
+				<h1>Repositories</h1>
+			);
+		}
 	}
 }
 
