@@ -52,7 +52,18 @@ const getRepoData = gql`
 class Repo extends Component {
 
 	render(){
-
+		var userid = this.props.userid;
+		return(
+			<Query query={getRepoData} variables={{userid}}>
+				{({loading, error, data}) => {
+					if(loading) return <h2>Loading ...</h2>;
+					if(error) return `Error! ${error.message}}`;
+					return (
+						<h1>Repo Encontrado</h1>
+					);
+				}}
+			</Query>
+		);
 	}
 }
 

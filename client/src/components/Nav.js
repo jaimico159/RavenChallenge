@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import User from './User';
+import Repo from './Repo';
 
 class Nav extends Component {
 	constructor(props){
@@ -9,6 +10,7 @@ class Nav extends Component {
 			placeholder: "Search GitHub Users...",
 			search: " in:login",
 			inSearch: "true",
+			userid: "",
 		}
 	}
 
@@ -21,7 +23,13 @@ class Nav extends Component {
 
 	changeInSearch(){
 		this.setState({
-			inSearch: !this.state.inSearch
+			inSearch: !this.state.inSearch,
+		});
+	}
+
+	setUserId(userid){
+		this.setState({
+			userid: userid
 		});
 	}
 
@@ -41,12 +49,16 @@ class Nav extends Component {
 					</div>
 				</div>
 				</div>
-					<User word={this.state.search} click={()=>this.changeInSearch()}/>
+					<User 
+						word={this.state.search} 
+						click1={()=>this.changeInSearch()}
+						click2={this.setUserId.bind(this)}
+					/>
 				</div>
 			);
 		} else {
 			return (
-				<h1>Repositories</h1>
+				<Repo userid={this.state.userid}/>
 			);
 		}
 	}
