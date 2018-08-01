@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 
-const fragments = const fragments = gql`
+const fragments = gql`
 	fragment fields on Node {
   ...on User{
     login
@@ -46,7 +46,22 @@ const getUserData = gql`
 class User extends Component {
 
 	render(){
+		var word = this.props.word;
+		return (
+			<Query query={getUserData} variables={{word}}>
+				{({loading, error, data}) => {
+						if(loading) return <h2>Loading ...</h2>;
+						if(error) return `Error! ${error.message}}`;
+						return (
+							<div id="users">
+								<div></div>
+							</div>
+						);
 
+					}
+				}
+			</Query>
+		);
 	}
 }
 

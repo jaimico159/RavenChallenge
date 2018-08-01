@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import User from './User';
 
 class Nav extends Component {
 	constructor(props){
@@ -33,6 +34,7 @@ class Nav extends Component {
 				<h1>{this.state.search}</h1>
 			</div>
 			</div>
+				<User word={this.state.search}/>
 			</div>
 		);
 	}
