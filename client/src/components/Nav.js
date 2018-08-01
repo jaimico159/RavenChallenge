@@ -6,11 +6,15 @@ class Nav extends Component {
 		super(props);
 		this.state = {
 			placeholder: "Search GitHub Users...",
-			search: "in:login",
+			search: " in:login",
 		}
 	}
 
-
+	Search(event){
+		this.setState({
+			search: event.target.value + ' in:login',
+		});
+	}
 
 	render(){
 		return (
@@ -22,9 +26,10 @@ class Nav extends Component {
 					<input 
 						className="col s12 m6 l6 xl6"
 						placeholder={this.state.placeholder}
-						onChange=""
+						onChange={this.Search.bind(this)}
 					/>
 				</div>
+				<h1>{this.state.search}</h1>
 			</div>
 			</div>
 			</div>
