@@ -35,7 +35,6 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-      <h1>GitHub Users</h1>
       <Nav/>
       </ApolloProvider>
     );

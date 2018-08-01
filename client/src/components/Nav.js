@@ -31,7 +31,6 @@ class Nav extends Component {
 						onChange={this.Search.bind(this)}
 					/>
 				</div>
-				<h1>{this.state.search}</h1>
 			</div>
 			</div>
 				<User word={this.state.search}/>
