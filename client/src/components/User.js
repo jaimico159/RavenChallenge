@@ -112,6 +112,7 @@ class User extends Component {
 	render(){
 		var word = this.props.word;
 		var click1 = this.props.click1;
+		var state = this.state;
 		return (
 			<Query query={getUserData} variables={{word}}>
 				{({loading, error, data}) => {
@@ -132,11 +133,15 @@ class User extends Component {
 							</div>
 							</div>
 						);
-						if(error) return `Error! ${error.message}}`;
+						if(error) return `Error! ${error.message}`;
+						console.log(state);
+						let indexOfLast = (state.currentPage)*(state.cardsPerPage);
+						let indexOfFirst = indexOfLast-state.cardsPerPage;
+						const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
 						return (
 							<div id="users">
 							<div className="row">
-								{data.search.edges.map(edge => {
+								{currentCards.map((edge, ind) => {
 									return (
 										<div 
 											className="col s12 m6 l4 xl3"
