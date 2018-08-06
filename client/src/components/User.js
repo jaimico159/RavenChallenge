@@ -49,19 +49,24 @@ class User extends Component {
 		this.state = {
 			currentPage: 1,
 			cardsPerPage: 12,
+			totalPages: 1,
 		}
 		window.addEventListener('resize', ()=>this.changeCardsPerPage());
 	}
 
 	nextPage(){
-		this.setState({
-			currentPage: this.state.currentPage+1,
-		});
+		if(this.state.currentPage<this.state.totalPages){
+			this.setState({
+					currentPage: this.state.currentPage+1,
+			});
+		}
 	}
 	prevPage(){
-		this.setState({
-			currentPage: this.state.currentPage-1,
-		});
+		if(this.state.currentPage>1){
+			this.setState({
+				currentPage: this.state.currentPage-1,
+			});
+		}
 	}
 	changeCardsPerPage(){
 		let height = document.documentElement.clientHeight;
