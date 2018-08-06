@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 
+import Pagi from './Pagi';
+
 const fragments = gql`
 	fragment fields on Node {
   ...on User{
@@ -55,6 +57,7 @@ class User extends Component {
 	}
 
 	nextPage(){
+		console.log("next");
 		if(this.state.currentPage<this.state.totalPages){
 			this.setState({
 					currentPage: this.state.currentPage+1,
@@ -62,12 +65,15 @@ class User extends Component {
 		}
 	}
 	prevPage(){
+		console.log("prev");
 		if(this.state.currentPage>1){
 			this.setState({
 				currentPage: this.state.currentPage-1,
 			});
 		}
 	}
+
+
 	changeCardsPerPage(){
 		let height = document.documentElement.clientHeight;
 		let width = document.documentElement.clientWidth;
@@ -113,7 +119,12 @@ class User extends Component {
 			}
 		}
 	}
-
+	calculateTotalPages(data){
+		let tot = Math.ceil(data.length/this.state.cardsPerPage);
+		this.setState({
+			totalPages: tot<2 ? 1:tot,
+		});
+	}
 	render(){
 		var word = this.props.word;
 		var click1 = this.props.click1;
@@ -140,11 +151,20 @@ class User extends Component {
 						);
 						if(error) return `Error! ${error.message}`;
 						console.log(state);
-						let indexOfLast = (state.currentPage)*(state.cardsPerPage);
-						let indexOfFirst = indexOfLast-state.cardsPerPage;
+						const indexOfLast = (state.currentPage)*(state.cardsPerPage);
+						const indexOfFirst = indexOfLast-state.cardsPerPage;
 						const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
+						const total = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
+						
 						return (
+
 							<div id="users">
+							<Pagi 
+								currentPage={state.currentPage} 
+								totalPages={total} 
+								next={this.nextPage.bind(this)}
+								prev={this.prevPage.bind(this)}
+							/>
 							<div className="row">
 								{currentCards.map((edge, ind) => {
 									return (
