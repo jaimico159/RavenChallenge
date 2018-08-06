@@ -57,7 +57,7 @@ class Repo extends Component {
 			<Query query={getRepoData} variables={{userid}}>
 				{({loading, error, data}) => {
 					if(loading) return (
-						<div class="center allign">
+						<div className="center allign">
 						<div className="preloader-wrapper big active">
 						<div className="spinner-layer spinner-blue-only">
 							<div className="circle-clipper left">

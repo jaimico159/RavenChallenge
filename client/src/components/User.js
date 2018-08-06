@@ -44,6 +44,70 @@ const getUserData = gql`
 
 
 class User extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			currentPage: 1,
+			cardsPerPage: 12,
+		}
+		window.addEventListener('resize', ()=>this.changeCardsPerPage());
+	}
+
+	nextPage(){
+		this.setState({
+			currentPage: this.state.currentPage+1,
+		});
+	}
+	prevPage(){
+		this.setState({
+			currentPage: this.state.currentPage-1,
+		});
+	}
+	changeCardsPerPage(){
+		let height = document.documentElement.clientHeight;
+		let width = document.documentElement.clientWidth;
+		if(width>1200){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 12,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 16,
+				});
+			}
+		} else if(width>992){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 16,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 24,
+				});
+			}
+		} else if(width>600){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 8,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 12,
+				});
+			}
+		} else {
+			if(height<900){
+				this.setState({
+					cardsPerPage: 3,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 4,
+				});
+			}
+		}
+	}
 
 	render(){
 		var word = this.props.word;
@@ -75,7 +139,7 @@ class User extends Component {
 								{data.search.edges.map(edge => {
 									return (
 										<div 
-											className="col s12 m6 l4 xl4"
+											className="col s12 m6 l4 xl3"
 											key={edge.node.id}
 											onClick={()=>{click1(edge.node.id, edge.node.name)}}
 										>

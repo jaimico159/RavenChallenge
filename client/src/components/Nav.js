@@ -27,6 +27,9 @@ class Nav extends Component {
 			inSearch: !this.state.inSearch,
 			userid: userid,
 			name: name,
+			cardsPerPage: 12,
+			currentPage: 1,
+
 		});
 	}
 
@@ -40,7 +43,7 @@ class Nav extends Component {
 						<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
 						<div className="col s12 m6 l6 xl6">
 						<input 
-							className="white"
+							className="browser-default white"
 							placeholder={this.state.placeholder}
 							onChange={this.Search.bind(this)}
 							style={{margin: '20px 0 0 0'}}
