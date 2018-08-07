@@ -119,8 +119,11 @@ class User extends Component {
 	}
 	calculateTotalPages(data){
 		let tot = Math.ceil(data.length/this.state.cardsPerPage);
+		this.totalPages = (tot < 2) ? 1:tot;
+	}
+	setPage(num){
 		this.setState({
-			totalPages: tot<2 ? 1:tot,
+			currentPage: num,
 		});
 	}
 	render(){
@@ -162,6 +165,7 @@ class User extends Component {
 								totalPages={this.totalPages} 
 								next={this.nextPage.bind(this)}
 								prev={this.prevPage.bind(this)}
+								setPage={this.setPage.bind(this)}
 							/>
 							<div className="row">
 								{currentCards.map((edge, ind) => {

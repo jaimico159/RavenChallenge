@@ -16,7 +16,7 @@ class Pagi extends Component {
 	 			arr.push(<li className="active" key={i}><a href="#!">{i}</a></li>);
 			}
 			else{
- 				arr.push(<li className="waves-effect" key={i}><a href="#!">{i}</a></li>);  			
+ 				arr.push(<li className="waves-effect" key={i} onClick={()=>this.props.setPage(i)}><a href="#!">{i}</a></li>);  			
    		}
   	}
   	if(this.props.currentPage === this.props.totalPages){

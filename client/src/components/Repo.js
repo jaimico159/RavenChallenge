@@ -124,11 +124,13 @@ class Repo extends Component {
 	}
 	calculateTotalPages(data){
 		let tot = Math.ceil(data.length/this.state.cardsPerPage);
+		this.totalPages = (tot < 2) ? 1:tot;
+	}
+	setPage(num){
 		this.setState({
-			totalPages: tot<2 ? 1:tot,
+			currentPage: num,
 		});
 	}
-
 	render(){
 		var userid = this.props.userid;
 		var state = this.state;
@@ -165,6 +167,7 @@ class Repo extends Component {
 								totalPages={this.totalPages} 
 								next={this.nextPage.bind(this)}
 								prev={this.prevPage.bind(this)}
+								setPage={this.setPage.bind(this)}
 							/>
 							{currentCards.map(edge => {
 								return (
