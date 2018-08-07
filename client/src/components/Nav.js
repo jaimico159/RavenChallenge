@@ -14,13 +14,21 @@ class Nav extends Component {
 			userid: "",
 			name: "",
 			totalPages: 1,
+			searching: false,
 		}
 	}
 
 	Search(event){
-		this.setState({
-			search: event.target.value + ' in:login',
-		});
+		if(event.target.value !== ""){
+			this.setState({
+				search: event.target.value + ' in:login',
+				searching: true,
+			});
+		}else{
+			this.setState({
+				searching: false,
+			});
+		}
 	}
 
 	changeInSearch(userid, name){
@@ -34,31 +42,60 @@ class Nav extends Component {
 		});
 	}
 
+	onSearching(){
+		this.setState({
+			searching: true
+		});
+	}
+
 	render(){
 		if(this.state.inSearch){
-			return (
-				<div>
-				<div className="grey lighten-3">
-				<div className="container">
-					<div className="row">
-						<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
-						<div className="col s12 m6 l6 xl6">
-						<input 
-							className="browser-default white"
-							placeholder={this.state.placeholder}
-							onChange={this.Search.bind(this)}
-							style={{margin: '20px 0 0 0'}}
-						/>
+			if(this.state.searching){
+				return (
+					<div>
+					<div className="grey lighten-3">
+					<div className="container">
+						<div className="row">
+							<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
+							<div className="col s12 m6 l6 xl6">
+							<input 
+								className="browser-default white"
+								placeholder={this.state.placeholder}
+								onChange={this.Search.bind(this)}
+								style={{margin: '20px 0 0 0'}}
+							/>
+							</div>
 						</div>
 					</div>
-				</div>
-				</div>
-					<User 
-						word={this.state.search} 
-						click1={this.changeInSearch.bind(this)}
-					/>
-				</div>
-			);
+					</div>
+						<User 
+							word={this.state.search} 
+							click1={this.changeInSearch.bind(this)}
+						/>
+					</div>
+				);
+			}
+			return (
+					<div>
+					<div className="grey lighten-3">
+					<div className="container">
+						<div className="row">
+							<h3 className="col s12 m6 l6 xl6">GitHub Users</h3>
+							<div className="col s12 m6 l6 xl6">
+							<input 
+								className="browser-default white"
+								placeholder={this.state.placeholder}
+								onChange={this.Search.bind(this)}
+								style={{margin: '20px 0 0 0'}}
+							/>
+							</div>
+						</div>
+					</div>
+					</div>
+						<h4 className="center allign">Write Something ...</h4>
+					</div>
+				);
+			
 		} else {
 			return (
 				<div>

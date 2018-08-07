@@ -154,45 +154,49 @@ class Repo extends Component {
 						</div>
 						</div>
 					);
-					if(error) return `Error! ${error.message}}`;
-
-					const indexOfLast = (state.currentPage)*(state.cardsPerPage);
-					const indexOfFirst = indexOfLast-state.cardsPerPage;
-					const currentCards = data.node.repositories.edges.slice(indexOfFirst, indexOfLast);
-					this.totalPages = Math.ceil(data.node.repositories.edges.length/this.state.cardsPerPage);
-					return (
-						<div>
-							<Pagi
-								currentPage={state.currentPage} 
-								totalPages={this.totalPages} 
-								next={this.nextPage.bind(this)}
-								prev={this.prevPage.bind(this)}
-								setPage={this.setPage.bind(this)}
-							/>
-							{currentCards.map(edge => {
-								return (
-									<div key={edge.node.id} className = "container">
-									<div className="row">
-									<div className="col s12">
-										<div className="card-panel grey lighten-5 z-depth-1">
-											<div className="row">
-												<div className="col s4 m5 l5 xl5">
-													<h6>{edge.node.name}</h6>
-													<p>{edge.node.description}</p>
-												</div>
-												<div className="col s4 offset-s4 m3 offset-m4 l3 offset-l4 xl3 offset-xl4">
-													{'Pull Requests Count: '+edge.node.pullRequests.totalCount}
+					if(error) return `Error! ${error.message}`;
+					if(data.node.repositories.edges.length === 0){
+							return <h6 className="center allign">This User has no Repositories ...</h6>
+					}
+					else{
+						const indexOfLast = (state.currentPage)*(state.cardsPerPage);
+						const indexOfFirst = indexOfLast-state.cardsPerPage;
+						const currentCards = data.node.repositories.edges.slice(indexOfFirst, indexOfLast);
+						this.totalPages = Math.ceil(data.node.repositories.edges.length/this.state.cardsPerPage);
+						return (
+							<div>
+								<Pagi
+									currentPage={state.currentPage} 
+									totalPages={this.totalPages} 
+									next={this.nextPage.bind(this)}
+									prev={this.prevPage.bind(this)}
+									setPage={this.setPage.bind(this)}
+								/>
+								{currentCards.map(edge => {
+									return (
+										<div key={edge.node.id} className = "container">
+										<div className="row">
+										<div className="col s12">
+											<div className="card-panel grey lighten-5 z-depth-1">
+												<div className="row">
+													<div className="col s4 m5 l5 xl5">
+														<h6>{edge.node.name}</h6>
+														<p>{edge.node.description}</p>
+													</div>
+													<div className="col s4 offset-s4 m3 offset-m4 l3 offset-l4 xl3 offset-xl4">
+														{'Pull Requests Count: '+edge.node.pullRequests.totalCount}
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									</div>
-									</div>
-								);
-								}
-								)}
-						</div>
-					);
+										</div>
+										</div>
+									);
+									}
+									)}
+							</div>
+						);
+					}
 				}}
 			</Query>
 		);

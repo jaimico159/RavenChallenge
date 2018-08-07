@@ -150,48 +150,52 @@ class User extends Component {
 							</div>
 							</div>
 						);
-						if(error) return `Error! ${error.message}`;
-						
-						const indexOfLast = (state.currentPage)*(state.cardsPerPage);
-						const indexOfFirst = indexOfLast-state.cardsPerPage;
-						const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
-						this.totalPages = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
-						
-						return (
+						if(error) return <h6 className="center allign">Error! {error.message}</h6>;
+						if(data.search.edges.length === 0){
+							return <h6 className="center allign">There are no results, try another user ...</h6>
+						}
+						else{
+							const indexOfLast = (state.currentPage)*(state.cardsPerPage);
+							const indexOfFirst = indexOfLast-state.cardsPerPage;
+							const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
+							this.totalPages = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
+							
+							return (
 
-							<div id="users">
-							<Pagi 
-								currentPage={state.currentPage} 
-								totalPages={this.totalPages} 
-								next={this.nextPage.bind(this)}
-								prev={this.prevPage.bind(this)}
-								setPage={this.setPage.bind(this)}
-							/>
-							<div className="row">
-								{currentCards.map((edge, ind) => {
-									return (
-										<div 
-											className="col s12 m6 l4 xl3"
-											key={edge.node.id}
-											onClick={()=>{click1(edge.node.id, edge.node.name)}}
-										>
-											<div className="card-panel grey lighten-5 z-depth-1">
-											<div className="row valign-wrapper">
-											<div className="col s4">
-												<img alt="" src={edge.node.avatarUrl} className="circle responsive-img"/>
+								<div id="users">
+								<Pagi 
+									currentPage={state.currentPage} 
+									totalPages={this.totalPages} 
+									next={this.nextPage.bind(this)}
+									prev={this.prevPage.bind(this)}
+									setPage={this.setPage.bind(this)}
+								/>
+								<div className="row">
+									{currentCards.map((edge, ind) => {
+										return (
+											<div 
+												className="col s12 m6 l4 xl3"
+												key={edge.node.id}
+												onClick={()=>{click1(edge.node.id, edge.node.name)}}
+											>
+												<div className="card-panel grey lighten-5 z-depth-1">
+												<div className="row valign-wrapper">
+												<div className="col s4">
+													<img alt="" src={edge.node.avatarUrl} className="circle responsive-img"/>
+												</div>
+												<div className="col s8">
+													<h5 className="truncate">{'['+edge.node.name+'], ['+edge.node.location+']'}</h5>
+													<h6 className="truncate">{'['+edge.node.login+']'}</h6>
+												</div>
+												</div>
+												</div>
 											</div>
-											<div className="col s8">
-												<h5 className="truncate">{'['+edge.node.name+'], ['+edge.node.location+']'}</h5>
-												<h6 className="truncate">{'['+edge.node.login+']'}</h6>
-											</div>
-											</div>
-											</div>
-										</div>
-									);
-								})}
-							</div>
-							</div>
-						);
+										);
+									})}
+								</div>
+								</div>
+							);
+						}
 
 					}
 				}
