@@ -6,7 +6,7 @@ import Pagi from './Pagi';
 const fragments = gql`
 	fragment repos on Node {
   ...on User{
-    repositories(first: 20, privacy: PUBLIC, orderBy: {field:NAME,direction :ASC} ){
+    repositories(first: 100, privacy: PUBLIC, orderBy: {field:NAME,direction :ASC} ){
       edges{
         node{
           ...on Repository{
@@ -22,7 +22,7 @@ const fragments = gql`
     }
   }
   ...on Organization{
-    repositories(first: 20, privacy: PUBLIC, orderBy: {field:NAME,direction :ASC} ){
+    repositories(first: 100, privacy: PUBLIC, orderBy: {field:NAME,direction :ASC} ){
       edges{
         node{
           ...on Repository{

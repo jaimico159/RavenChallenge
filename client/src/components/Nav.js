@@ -65,10 +65,10 @@ class Nav extends Component {
 				<div className="grey lighten-3">
 				<div className="container">
 					<div className="row">
-						<a className="col s1 m2 l2 xl2" href="#" onClick={()=>{this.changeInSearch()}}>
+						<a className="col s12 m3 l2 xl2" href="#" onClick={()=>{this.changeInSearch()}}>
 							<img alt="" src={back} />
 						</a>
-						<h3 className="col s11 m6 l6 xl6">{this.state.name}</h3>
+						<h3 className="col s12 m9 l10 xl10 center allign">{this.state.name}</h3>
 					</div>
 				</div>
 				</div>
