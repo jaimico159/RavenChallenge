@@ -51,21 +51,19 @@ class User extends Component {
 		this.state = {
 			currentPage: 1,
 			cardsPerPage: 12,
-			totalPages: 1,
 		}
+		this.totalPages = 1;
 		window.addEventListener('resize', ()=>this.changeCardsPerPage());
 	}
 
 	nextPage(){
-		console.log("next");
-		if(this.state.currentPage<this.state.totalPages){
+		if(this.state.currentPage<this.totalPages){
 			this.setState({
 					currentPage: this.state.currentPage+1,
 			});
 		}
 	}
 	prevPage(){
-		console.log("prev");
 		if(this.state.currentPage>1){
 			this.setState({
 				currentPage: this.state.currentPage-1,
@@ -154,14 +152,14 @@ class User extends Component {
 						const indexOfLast = (state.currentPage)*(state.cardsPerPage);
 						const indexOfFirst = indexOfLast-state.cardsPerPage;
 						const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
-						this.state.totalPages = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
+						this.totalPages = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
 						
 						return (
 
 							<div id="users">
 							<Pagi 
 								currentPage={state.currentPage} 
-								totalPages={this.state.totalPages} 
+								totalPages={this.totalPages} 
 								next={this.nextPage.bind(this)}
 								prev={this.prevPage.bind(this)}
 							/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
+import Pagi from './Pagi';
 
 const fragments = gql`
 	fragment repos on Node {
@@ -50,9 +51,87 @@ const getRepoData = gql`
 `;
 
 class Repo extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			currentPage: 1,
+			cardsPerPage: 3,
+		}
+		this.totalPages = 1;
+		window.addEventListener('resize', ()=>this.changeCardsPerPage());
+	}
+
+	nextPage(){
+		if(this.state.currentPage<this.totalPages){
+			this.setState({
+					currentPage: this.state.currentPage+1,
+			});
+		}
+	}
+	prevPage(){
+		if(this.state.currentPage>1){
+			this.setState({
+				currentPage: this.state.currentPage-1,
+			});
+		}
+	}
+
+
+	changeCardsPerPage(){
+		let height = document.documentElement.clientHeight;
+		let width = document.documentElement.clientWidth;
+		if(width>1200){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 4,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 6,
+				});
+			}
+		} else if(width>992){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 4,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 6,
+				});
+			}
+		} else if(width>600){
+			if(height<900){
+				this.setState({
+					cardsPerPage: 4,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 6,
+				});
+			}
+		} else {
+			if(height<900){
+				this.setState({
+					cardsPerPage: 4,
+				});
+			} else {
+				this.setState({
+					cardsPerPage: 6,
+				});
+			}
+		}
+	}
+	calculateTotalPages(data){
+		let tot = Math.ceil(data.length/this.state.cardsPerPage);
+		this.setState({
+			totalPages: tot<2 ? 1:tot,
+		});
+	}
 
 	render(){
 		var userid = this.props.userid;
+		var state = this.state;
 		return(
 			<Query query={getRepoData} variables={{userid}}>
 				{({loading, error, data}) => {
@@ -74,9 +153,20 @@ class Repo extends Component {
 						</div>
 					);
 					if(error) return `Error! ${error.message}}`;
+
+					const indexOfLast = (state.currentPage)*(state.cardsPerPage);
+					const indexOfFirst = indexOfLast-state.cardsPerPage;
+					const currentCards = data.node.repositories.edges.slice(indexOfFirst, indexOfLast);
+					this.totalPages = Math.ceil(data.node.repositories.edges.length/this.state.cardsPerPage);
 					return (
 						<div>
-							{data.node.repositories.edges.map(edge => {
+							<Pagi
+								currentPage={state.currentPage} 
+								totalPages={this.totalPages} 
+								next={this.nextPage.bind(this)}
+								prev={this.prevPage.bind(this)}
+							/>
+							{currentCards.map(edge => {
 								return (
 									<div key={edge.node.id} className = "container">
 									<div className="row">
@@ -95,7 +185,7 @@ class Repo extends Component {
 									</div>
 									</div>
 									</div>
-									);
+								);
 								}
 								)}
 						</div>
