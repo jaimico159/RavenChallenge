@@ -150,18 +150,18 @@ class User extends Component {
 							</div>
 						);
 						if(error) return `Error! ${error.message}`;
-						console.log(state);
+						
 						const indexOfLast = (state.currentPage)*(state.cardsPerPage);
 						const indexOfFirst = indexOfLast-state.cardsPerPage;
 						const currentCards = data.search.edges.slice(indexOfFirst, indexOfLast);
-						const total = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
+						this.state.totalPages = Math.ceil(data.search.edges.length/this.state.cardsPerPage);
 						
 						return (
 
 							<div id="users">
 							<Pagi 
 								currentPage={state.currentPage} 
-								totalPages={total} 
+								totalPages={this.state.totalPages} 
 								next={this.nextPage.bind(this)}
 								prev={this.prevPage.bind(this)}
 							/>
