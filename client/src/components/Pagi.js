@@ -4,7 +4,6 @@ class Pagi extends Component {
 
 	render(){
 		const arr = [];
-		console.log(this.props);
 		if(this.props.currentPage === 1){
 			arr.push(<li className="disabled" key="left"><a href="#!"><i className="material-icons">chevron_left</i></a></li>);
 		}
